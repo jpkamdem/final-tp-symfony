@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col items-center w-[100dvw] h-[100dvh]">
+
+    <nav class="w-full bg-rose-700 p-4 text-center text-white">
+        <h1 class="text-2xl font-bold">Liste de tâches</h1>
+    </nav>
+
+
+    <h1>Modifier la tâche {{task.id}}</h1>
+
+    <div class="bg-red-200 flex justify-center items-center">
+        {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+    <div class="w-full flex mb-2 my-1 justify-center">
+        <a class="p-2 text-md text-white uppercase font-bold bg-blue-500 hover:bg-blue-200 hover:text-blue-500" href="{{ path('app_task_index') }}">Retour à l'index</a>
+        {{ include('task/_delete_form.html.twig') }}
+    </div>
+    </div>
+{% endblock %}

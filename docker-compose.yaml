@@ -1,0 +1,36 @@
+services:
+  db:
+    container_name: db
+    image: postgres:16
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - app-network
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:8.14
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks:
+      - app-network
+volumes:
+  db:
+  pgadmin:
+networks:
+  app-network:
+    driver: bridge

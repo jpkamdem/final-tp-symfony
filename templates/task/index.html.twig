@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task index{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col items-center w-[100dvw] h-[100dvh]">
+
+    <nav class="w-full bg-rose-700 p-4 text-center text-white">
+        <h1 class="text-2xl font-bold">Liste de tâches</h1>
+    </nav>
+
+    <table class="table mt-4">
+        <thead>
+            <tr class="border bg-gray-200">
+                <th class="p-6 ">Id</th>
+                <th class="p-6 ">Titre</th>
+                <th class="p-6 ">Description</th>
+                <th class="p-6 ">Status</th>
+                <th class="p-6 ">Date de création</th>
+                <th class="p-6 ">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr class="border-r-1 border-l-1 border-b-1">
+                <td class="p-6">{{ task.id }}</td>
+                <td class="p-6">{{ task.title }}</td>
+                <td class="p-6">{{ task.description }}</td>
+                <td class="p-6">{{ task.status ? 'Complétée' : 'En attente' }}</td>
+                <td class="p-6">{{ task.createdAt ? task.createdAt|date("F j, Y, g:i a") : '' }}</td>
+                <td class="p-6 flex justify-between gap-2">
+                    <a class="p-2 bg-rose-700 text-white font-bold hover:text-rose-700 hover:cursor-pointer hover:bg-rose-200" href="{{ path('app_task_show', {'id': task.id}) }}">Afficher</a>
+                    <a class="p-2 bg-rose-700 text-white font-bold hover:text-rose-700 hover:cursor-pointer hover:bg-rose-200" href="{{ path('app_task_edit', {'id': task.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune données</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="bg-green-700 p-2 mt-4 font-bold text-white hover:bg-green-300 hover:cursor-pointer hover:text-green-700" href="{{ path('app_task_new') }}">Nouvelle tâche</a>
+    </div>
+{% endblock %}
