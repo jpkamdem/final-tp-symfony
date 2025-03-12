@@ -23,6 +23,22 @@ final class TaskController extends AbstractController
         ]);
     }
 
+    #[Route('/completed', name: 'app_task_completed', methods: ['GET'])]
+    public function completed(TaskRepository $taskRepository): Response
+    {
+        return $this->render('task/done.html.twig', [
+            'tasks' => $taskRepository->findBy(['status' => true])
+        ]);
+    }
+
+    #[Route('/not-completed', name: 'app_task_not_completed', methods: ['GET'])]
+    public function notCompleted(TaskRepository $taskRepository): Response
+    {
+        return $this->render('task/not_done.html.twig', [
+            'tasks' => $taskRepository->findBy(['status' => false])
+        ]);
+    }
+
     #[Route('/new', name: 'app_task_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

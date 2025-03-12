@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task index{% endblock %}
+{% block title %}Tâches complétées{% endblock %}
 
 {% block body %}
     <div class="flex flex-col items-center w-[100dvw] h-[100dvh]">
@@ -8,6 +8,8 @@
     <nav class="w-full bg-rose-700 p-4 text-center text-white">
         <h1 class="text-2xl font-bold">Liste de tâches</h1>
     </nav>
+
+    <section class="mt-12 flex flex-col justify-center my-4">
 
     <table class="table mt-4">
         <thead>
@@ -40,12 +42,8 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="bg-green-700 p-2 mt-4 font-bold text-white hover:bg-green-300 hover:cursor-pointer hover:text-green-700" href="{{ path('app_task_new') }}">Nouvelle tâche</a>
-
-    <a class="p-2 text-md text-white uppercase font-bold bg-blue-500 hover:bg-blue-200 hover:text-blue-500" href="{{ path('app_task_completed') }}">Tâches complétées</a>
-
+    </section>
     <a class="p-2 text-md text-white uppercase font-bold bg-blue-500 hover:bg-blue-200 hover:text-blue-500" href="{{ path('app_task_not_completed') }}">Tâches non complétées</a>
-
+    <a class="p-2 text-md text-white uppercase font-bold bg-blue-500 hover:bg-blue-200 hover:text-blue-500" href="{{ path('app_task_index') }}">Retour à l'index</a>
     </div>
 {% endblock %}
